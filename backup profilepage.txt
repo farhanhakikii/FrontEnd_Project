@@ -1,0 +1,154 @@
+import React from 'react'
+import Axios from 'axios'
+import { API_URL } from '../../constants/API'
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
+import { Modal } from 'react-bootstrap';
+import swal from 'sweetalert';
+
+class ProfilePage extends React.Component{
+    state = {
+        title: "",
+        synopsis: "",
+        image: "",
+        show: false,
+        userProfile: [],
+        writerNovelList: []
+    }
+
+    inputHandler = (e,field) => {
+        this.setState({[field]: e.target.value})
+    }
+
+    modalHandle = () => {
+        this.setState({show: !this.state.show, title: "", synopsis: ""})
+    }
+
+    postNovel = () => {
+        const { title, synopsis } = this.state
+        Axios.post(`${API_URL}/novel/${this.props.user.id}`, {
+            title,
+            synopsis
+        })
+        .then((res) => {
+            swal("Add Novel Success.")
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        this.modalHandle()
+    }
+
+    renderWriterNovel = () => {
+        Axios.get(`${API_URL}/users/${this.props.user.id}/novel`)
+        .then((res) => {
+            this.setState({ writerNovelList: res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    componentDidMount() {
+        Axios.get(`${API_URL}/users/${this.props.match.params.userId}`)
+        .then((res) => {
+            this.setState({userProfile: res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    componentDidUpdate() {
+        this.renderWriterNovel()
+    }
+
+    render() {
+        return (
+            this.props.match.params.userId == 1 || this.state.userProfile == null ?
+            <div className="mt-5 text-center">
+                <h1>Error 404</h1>
+                <h1>Not Found</h1>
+                <Link to="/">Return Home</Link>
+            </div> :
+            <div>
+                {
+                    this.state.userProfile.role == "writer" ? 
+                    <div className="container text-center mt-4">
+                        <div className="row">
+                            <div className="col-3">
+                                <img className="border" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png" style={{height: "200px", objectFit: "contain"}} alt="image"/>
+                                <h1>{this.state.userProfile.fullName}</h1>
+                                <h6>{this.state.userProfile.email}</h6>
+                                {
+                                    this.props.match.params.userId == this.props.user.id ?
+                                    <button className="btn" style={{fontSize: 20, backgroundColor: "black", color: "white"}}>Edit Profile</button> : null
+                                }
+                            </div>
+                            <div className="col-9">
+                                <h1 className="pb-2" style={{backgroundColor: "black", color: "white"}}>Creation :</h1>
+                                {
+                                    this.state.novelList.map((val) => {
+                                        return <div style={{backgroundColor: "black", color: "white"}}>
+                                            <h2>{val.title}</h2>
+                                            <p className="p-2 text-left">
+                                                Synopsis : {" "}{val.synopsis}
+                                                <Link style={{ textDecoration: "none", color: "blue" }}>
+                                                    {" Read Full Novel"}
+                                                </Link>
+                                            </p>
+                                        </div >
+                                    })
+                                }
+                                <button className="btn mt-1" style={{backgroundColor: "black", color: "white"}} onClick={this.modalHandle}>Add New Novel</button>
+                            </div>
+                        </div>
+                        <Modal show={this.state.show}>
+                            <Modal.Header>
+                            <Modal.Title>Add New Novel</Modal.Title>
+                            </Modal.Header>
+
+                            <Modal.Body>
+                                <input onChange={(e) => this.inputHandler(e,"title")} value={this.state.username} className="form-control mb-2" placeholder="Novel Title" type="text"></input>
+                                <textarea onChange={(e) => this.inputHandler(e,"synopsis")} value={this.state.password} className="form-control" placeholder="Synopsis"></textarea>
+                            </Modal.Body>
+
+                            <Modal.Footer>
+                                <button className="btn btn-dark" onClick={this.postNovel}>Save</button>
+                                <button className="btn btn-dark" onClick={this.modalHandle}>Cancel</button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div> : 
+                    <div className="text-center mt-5">
+                        <img className="border" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/1200px-User_font_awesome.svg.png" style={{height: "200px", objectFit: "contain"}} alt="image"/>
+                        <h1>{this.state.userProfile.fullName}</h1>
+                        <h6>{this.state.userProfile.email}</h6>
+                        {
+                            this.props.match.params.userId == this.props.user.id && this.props.user.type == "free" ? 
+                            <div>
+                            <button className="btn btn-warning">Upgrade To Premium</button>
+                            <Link to="/">
+                                <button className="btn" style={{backgroundColor: "black", color: "white"}}>Edit Profile</button> 
+                            </Link>
+                            </div> : null
+                        }
+                        {
+                            this.props.match.params.userId == this.props.user.id && this.props.user.type != "free" ?
+                            <button className="btn" style={{backgroundColor: "black", color: "white"}}>Edit Profile</button>
+                            : null
+                        }                        
+                    </div>
+                }
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+      user: state.user,
+    };
+  };
+
+export default connect(mapStateToProps)(withRouter(ProfilePage));

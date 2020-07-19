@@ -1,0 +1,7 @@
+textarea {
+    width: 75%;
+    height: 520px;
+    box-sizing: border-box;
+  }:disabled{
+    color: white;
+  }

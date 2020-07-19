@@ -1,0 +1,219 @@
+{
+  "users": [
+    {
+      "username": "ADMIN",
+      "fullName": "ADMIN",
+      "password": "password",
+      "email": "Admin@thisweb.com",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "username": "zun",
+      "fullName": "zun",
+      "password": "zun",
+      "email": "zun@mail.com",
+      "role": "reader",
+      "isVerified": false,
+      "creation": [],
+      "type": "free",
+      "id": 2
+    },
+    {
+      "username": "han",
+      "fullName": "han",
+      "password": "han",
+      "email": "han",
+      "role": "writer",
+      "isVerified": false,
+      "creation": [],
+      "type": "free",
+      "id": 3
+    },
+    {
+      "username": "far",
+      "fullName": "far",
+      "password": "far",
+      "email": "far",
+      "role": "writer",
+      "isVerified": false,
+      "creation": [],
+      "type": "free",
+      "id": 4
+    }
+  ],
+  "carousel": [
+    {
+      "image": "https://www.itl.cat/pngfile/big/146-1461098_concert-crowd-wallpaper-events-concerts.jpg",
+      "Description": "Concert"
+    },
+    {
+      "image": "https://static.limakaki.com/2017/04/bali-prewedding-photography-02.jpg",
+      "Description": "Wedding"
+    },
+    {
+      "image": "https://9to5mac.com/wp-content/uploads/sites/6/2018/02/fields.jpg?quality=82&strip=all",
+      "Description": "Exhibition"
+    },
+    {
+      "image": "https://checkyeti.imgix.net/images/optimized/zipline-tour-with-sea-view-in-the-makarska-riviera-tip-extreme-travel-agency.jpg",
+      "Description": "Outing"
+    }
+  ],
+  "novel": [
+    {
+      "title": "Hallo",
+      "author": "han",
+      "type": "premium",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict"
+        },
+        {
+          "id": 3,
+          "eptitle": "End"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "title": "Hallo2",
+      "author": "han",
+      "type": "free",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha2"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict2"
+        },
+        {
+          "id": 3,
+          "eptitle": "End2"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "title": "Hallo3",
+      "author": "han",
+      "type": "free",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict"
+        },
+        {
+          "id": 3,
+          "eptitle": "End"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "title": "Hallo4",
+      "author": "far",
+      "type": "premium",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict"
+        },
+        {
+          "id": 3,
+          "eptitle": "End"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "title": "Hallo5",
+      "author": "far",
+      "type": "free",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict"
+        },
+        {
+          "id": 3,
+          "eptitle": "End"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "title": "Hallo6",
+      "author": "far",
+      "type": "free",
+      "image": "https://nice-assets.s3-accelerate.amazonaws.com/smart_templates/e639b9513adc63d37ee4f577433b787b/assets/wn5u193mcjesm2ycxacaltq8jdu68kmu.jpg",
+      "synopsis": "Jack and Jill is the story of a boy and a girl who went up a hill together. They went to fetch a pail of water, but unfortunately, their plan is disrupted when Jack falls and hits his head, and rolls back down the hill. Then, Jill falls too, and comes tumbling down after Jack.",
+      "episode": [
+        {
+          "id": 1,
+          "eptitle": "Aloha"
+        },
+        {
+          "id": 2,
+          "eptitle": "Conflict"
+        },
+        {
+          "id": 3,
+          "eptitle": "End"
+        }
+      ],
+      "id": 6
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "Action"
+    },
+    {
+      "id": 2,
+      "name": "Comedy"
+    },
+    {
+      "id": 3,
+      "name": "Romance"
+    },
+    {
+      "id": 4,
+      "name": "Adventure"
+    },
+    {
+      "id": 5,
+      "name": "Biography"
+    }
+  ]
+}
