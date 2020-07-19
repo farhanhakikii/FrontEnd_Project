@@ -7,18 +7,12 @@ import Cookies from "universal-cookie";
 import Axios from "axios";
 import { API_URL } from '../../constants/API';
 import swal from 'sweetalert';
-import DropdownItem from 'react-bootstrap/DropdownItem';
 
 class Navbar extends React.Component{
     state={
       show: false,
       username: "",
       password: "",
-      category: []
-    }
-
-    componentDidMount() {
-      this.renderCategory()
     }
 
     modalHandle = () => {
@@ -32,16 +26,6 @@ class Navbar extends React.Component{
       }
 
       this.renderNavbar()
-    }
-
-    renderCategory = () => {
-      Axios.get(`${API_URL}/category`)
-      .then((res) => {
-        this.setState({category: res.data})
-      })
-      .catch((err) => {
-        console.log(err)
-      })
     }
 
     logoutBtnHandler = () => {
@@ -90,48 +74,18 @@ class Navbar extends React.Component{
     }
 
     renderNavbar = () => {
-      return <div style={{ backgroundColor: "black"}} className="d-flex flex-row justify-content-around align-items-center p-1 navbar-container">
+      return <div style={{ backgroundColor: "black"}} className="d-flex flex-row justify-content-between align-items-center px-4 navbar-container">
       <div className="d-flex flex-row p-2">
-        <div className="mt-1 mr-4 text-white" style={{fontSize: 20}}>
+        <div className="mt-1 mr-4 text-white" style={{fontSize: 20, fontFamily: "Impact"}}>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            Logo
+            ASPOS
           </Link>
         </div>
-        <div className="mr-4 text-white" style={{fontSize: 20}}>
-          <Dropdown>
-            <Dropdown.Toggle variant="dark">
-              Category
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item>All</Dropdown.Item>
-              {
-                this.state.category.map((val) => {
-                  return <Dropdown.Item>{val.categoryName}</Dropdown.Item>
-                })
-              }
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-        <input style={{width: "750px", height: "40px"}} type='text' className="form-control rounded mr-4" placeholder='Search Novel'/>  
+      </div>
+      <div>
         {
           this.props.user.username ? 
           <>
-            {/* <div className="text-white" style={{fontSize: 20}}>
-              <Dropdown>
-                <Dropdown.Toggle variant="dark">
-                  {this.props.user.username}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Link to={`/users/${this.props.user.id}`}>
-                    <Dropdown.Item onClick={this.toProfile}>Profile</Dropdown.Item>
-                  </Link>
-                  <Dropdown.Item>History</Dropdown.Item>
-                  <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-                    <Dropdown.Item onClick={this.logoutBtnHandler}>Logout</Dropdown.Item>
-                  </Link>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div> */}
           <Link to={`/users/${this.props.user.id}`}>
             <button className="btn btn-dark mr-2 p-1">{this.props.user.username}</button>
           </Link>

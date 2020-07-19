@@ -3,12 +3,11 @@ import { Carousel } from 'react-bootstrap'
 import NovelCard from "../components/NovelCard"
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
-import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import noImage from "../../assets/Images/no-image.jpg"
 import Novel from "../components/Novel"
 import Pagination from "../components/Pagination"
-import swal from 'sweetalert';
+import { Dropdown } from 'react-bootstrap';
 
 class Home extends React.Component{
     state = {
@@ -16,23 +15,48 @@ class Home extends React.Component{
         novelList: [],
         loading: false,
         currentPage: 1,
-        novelPerPage: 15
+        novelPerPage: 15,
+        category: [],
+        selectedCategory: 0,
+        viewByCategory: false
     }
 
-    // getCarousel = () => {
-    //     Axios.get(`${API_URL}/carousel`)
-    //     .then((res) => {
-    //         this.setState({carousel: res.data})
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-    // }
+    inputHandler = (e,field) => {
+        this.setState({[field]: e.target.value})
+    }
 
+    viewNovel = () => {
+        const { selectedCategory } = this.state
+        if( selectedCategory == 0 ) {
+            this.getNovel()
+        } else {
+            this.getNovelByCategory()
+        }
+    }
+
+    renderCategory = () => {
+        Axios.get(`${API_URL}/category`)
+        .then((res) => {
+          this.setState({category: res.data})
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    getNovelByCategory = () => {
+        Axios.get(`${API_URL}/novel/category/${this.state.selectedCategory}`)
+        .then((res) => {
+            this.setState({ novelList: res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+  
     getNovel = () => {
         Axios.get(`${API_URL}/novel`)
-        //Axios.get(`https://jsonplaceholder.typicode.com/posts`)
-        .then((res) => {
+            .then((res) => {
             this.setState({novelList: res.data})
             this.setState({loading: false})
             console.log(res)
@@ -44,32 +68,13 @@ class Home extends React.Component{
 
     componentDidMount(){
         this.getNovel()
+        this.renderCategory()
     }
 
-    // renderCarousel = () => {            
-    //     return this.state.carousel.map((val) => {
-    //         return <Carousel.Item>
-    //             <img className="d-block w-100" src={val.image} style={{ height: "595px", width: "400px"}} alt="First slide"/>
-    //             <Carousel.Caption>
-    //                 <h1>{val.Description}</h1>
-    //             </Carousel.Caption>
-    //         </Carousel.Item>   
-    //     })
-    // }
+    componentDidUpdate(){
+        //this.viewNovel()
+    }
 
-    // productList = () => {
-    //     return <div className="container-fluid center d-flex flex-wrap p-4">
-    //             {
-    //                 this.state.novelList.map((val) => {
-    //                     return <div className="p-3">
-    //                               <Link style={{ textDecoration: "none", color: "inherit" }} to={`/novel/${val.id}`}>
-    //                                 <NovelCard imgsrc={val.image ? val.image : noImage} title={val.title} author={val.author.username}/>      
-    //                               </Link>
-    //                            </div>
-    //                 })
-    //             }
-    //             </div>
-    // }
     render() {
         const { currentPage, novelPerPage, novelList, loading } = this.state
         const indexOfLastNovel = currentPage * novelPerPage
@@ -81,16 +86,30 @@ class Home extends React.Component{
         const prevPage = () => this.setState({ currentPage: currentPage - 1 })
         return (
             <>
-            {/* <div>
-                <Carousel>
-                    {this.renderCarousel()} 
-                </Carousel>
-            </div>
-            {this.productList()} */}
-                <h1 className="mt-1 border p-1 text-center">Our Novel List</h1>
+                <div className="d-flex align-items-center justify-content-center mt-2">
+                    <div>
+                        <div className="mr-4 text-white" style={{fontSize: 20}}>
+                            <select value={this.state.selectedCategory} className="mt-2 rounded form-control" onChange={(e) => this.inputHandler(e, "selectedCategory")}>
+                                <option hidden>Category</option>
+                                {
+                                    this.state.category.map((val) => {
+                                        return <option value={val.id}>{val.categoryName}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <input style={{width: "750px", height: "35px", backgroundColor: "black", color: "white"}} type='text' className="form-control rounded mt-2 mr-4" placeholder='Search Novel'/>
+                    </div>
+                    <div>
+                        <button className="btn mt-2" style={{backgroundColor: "black", color: "white"}} onClick={this.viewNovel}>Filter</button>
+                    </div>
+                </div>
                 <Novel novel={currentNovel} loading={loading}/>
-                <Pagination novelPerPage={novelPerPage} totalNovel={novelList.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
-
+                <div className="mt-5">
+                    <Pagination novelPerPage={novelPerPage} totalNovel={novelList.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
+                </div>
             </>
         )
     }
