@@ -54,6 +54,30 @@ class Home extends React.Component{
             console.log(err)
         })
     }
+
+    // descending = () => {
+    //     this.state.novelList.sort(function(a,b){
+    //         if(a.title.toLowerCase() < b.title.toLowerCase())
+    //             return -1;
+            
+    //         if(a.title.toLowerCase() > b.title.toLowerCase())
+    //             return 1;
+
+    //         return 0;
+    //     })          
+    // }
+
+    // ascending = () => {
+    //     this.state.novelList.sort(function(a,b){
+    //         if(a.title.toLowerCase() > b.title.toLowerCase())
+    //             return -1;
+            
+    //         if(a.title.toLowerCase() < b.title.toLowerCase())
+    //             return 1;
+
+    //         return 0;
+    //     })          
+    // }
   
     getNovel = () => {
         Axios.get(`${API_URL}/novel`)
@@ -118,6 +142,10 @@ class Home extends React.Component{
                         <input value={this.state.searchBar} style={{width: "750px", height: "35px", backgroundColor: "black", color: "white"}} 
                                type='text' className="form-control rounded mt-2 mr-4" placeholder='Search Novel' onChange={(e) => this.inputHandler(e, "searchBar")}/>
                     </div>
+                    {/* <div>
+                        <button className="btn mt-2 mr-2" style={{backgroundColor: "black", color: "white"}} onClick={this.ascending}>A - Z</button>
+                        <button className="btn mt-2 mr-2" style={{backgroundColor: "black", color: "white"}} onClick={this.descending}>A - Z</button>
+                    </div> */}
                     <div>
                         <button className="btn mt-2" style={{backgroundColor: "black", color: "white"}} onClick={this.viewNovel}>Filter</button>
                     </div>
