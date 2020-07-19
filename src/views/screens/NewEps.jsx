@@ -61,7 +61,7 @@ class NewEps extends React.Component{
                 novelNumber: this.props.match.params.novelId
             })
             .then((res) => {
-                swal("Posting Episode Success!")
+                swal("Berhasil Posting Episode")
                 this.setState({episodeContent: "", episodeTitle: "", isPosted: true})
             })
             .catch((err) => {

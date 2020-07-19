@@ -59,7 +59,7 @@ class ListNovel extends React.Component{
         .then((res) => {
             Axios.delete(`${API_URL}/novel/${novelId}`)
             .then((res) => {
-                swal("Delete Novel Success")
+                swal("Berhasil Menghapus Novel")
             })
             .catch((err) => {
                 console.log(err)

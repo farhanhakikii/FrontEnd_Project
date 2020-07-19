@@ -35,7 +35,7 @@ class ListCategory extends React.Component{
                     categoryName
                 })
                 .then((res) => {
-                    swal("Add New Category Success.")
+                    swal("Berhasil Menambah Kategori Baru")
                     this.setState({categoryName: ""})
                 })
                 .catch((err) => {
@@ -51,7 +51,7 @@ class ListCategory extends React.Component{
     deleteCategory = (id) => {
         Axios.delete(`${API_URL}/category/${id}`)
         .then((res) => {
-            swal("Delete Success")
+            swal("Berhasil Menghapus Kategori.")
         })
         .catch((err) => {
             console.log(err)

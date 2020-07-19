@@ -1,6 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import { API_URL } from '../../constants/API'
+import swal from 'sweetalert'
 
 class ListWriter extends React.Component{
     state = {
@@ -11,6 +12,11 @@ class ListWriter extends React.Component{
         this.renderWriter()
     }
 
+    componentDidUpdate(){
+        this.renderWriter()
+    }
+
+
     renderWriter = () => {
         Axios.get(`${API_URL}/users/role`, {
             params: {
@@ -19,6 +25,16 @@ class ListWriter extends React.Component{
         })
         .then((res) => {
             this.setState({allWriter: res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    deleteWriter = (value) => {
+        Axios.delete(`${API_URL}/users/${value}`)
+        .then((res) => {
+            swal("Berhasil Menghapus Writer")
         })
         .catch((err) => {
             console.log(err)
@@ -49,7 +65,7 @@ class ListWriter extends React.Component{
                             <td>{val.fullName}</td>
                             <td>{val.email}</td>
                             <td>{val.verified ? "Yes" : "No"}</td>
-                            <td><button className="btn btn-danger">Delete</button></td>
+                            <td><button className="btn btn-danger" onClick={() => this.deleteWriter(val.id)}>Delete</button></td>
                         </tr>
                     })
                 }

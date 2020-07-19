@@ -18,7 +18,7 @@ class AdminDashboard extends React.Component{
                 </Link>
 
                 <Link to="/listreader">
-                    <button className="btn btn-success mr-3">List User</button>
+                    <button className="btn btn-success mr-3">List Reader</button>
                 </Link>
 
                 <Link to="/listcategory">    

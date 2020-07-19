@@ -30,7 +30,6 @@ class NovelPage extends React.Component{
         .then((res) => {
           this.setState({ novelDetails: res.data })
           this.setState({ username: res.data.author.username, id: res.data.id, userId: res.data.author.id})
-          console.log(res.data)
           this.loadEpisode()
         })
         .catch((err) => {
@@ -49,12 +48,12 @@ class NovelPage extends React.Component{
     fileUploadHandler = () => {
         let formData = new FormData();
         if(this.state.selectedFile == null){
-            swal("Choose File First")
+            swal("Pilih File Dahulu")
         }else {
             formData.append("file", this.state.selectedFile, this.state.selectedFile.name )
             Axios.patch(`${API_URL}/documents/novel/${this.state.id}`, formData)
             .then((res) => {
-                swal("Cover Photo Updated")
+                swal("Foto Cover Novel Diperbaharui")
                 this.uploadHandle()
             })
             .catch((err => {

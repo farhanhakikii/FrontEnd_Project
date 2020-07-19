@@ -59,8 +59,7 @@ class ProfilePage extends React.Component{
             type: "free"
         })
         .then((res) => {
-            swal("Add Novel Success.")
-            console.log(res)
+            swal("Berhasil Menambah Novel")
         })
         .catch((err) => {
             console.log(err)
@@ -72,7 +71,6 @@ class ProfilePage extends React.Component{
         Axios.get(`${API_URL}/novel/ofUser/?owner=${this.props.match.params.userId}`)
         .then((res) => {
             this.setState({ writerNovelList: res.data})
-            console.log(res.data)
         })
         .catch((err) => {
             console.log(err)
@@ -92,7 +90,7 @@ class ProfilePage extends React.Component{
     addCategoryToNovel = () => {
         Axios.put(`${API_URL}/novel/${this.state.selectedNovel}/category/${this.state.selectedCategory}`)
         .then((res) => {
-            swal("Add Category to Novel Success")
+            swal("Berhasil Menambahkan Kategori ke Novel")
             this.setState({selectedCategory: "", selectedNovel: ""})
             this.showCategoryHandle()
         })
@@ -108,20 +106,23 @@ class ProfilePage extends React.Component{
     fileUploadHandler = () => {
         const {userId, payPremium, accountNumber, accountOwner} = this.state
         let formUser = { userId, payPremium, accountNumber, accountOwner }
-
-        let formData = new FormData();
-        formData.append("file", this.state.selectedFile, this.state.selectedFile.name )
-        formData.append("paymentData", JSON.stringify(formUser));
-
-        Axios.post(`${API_URL}/documents/payment/${this.props.user.id}`, formData)
-        .then((res) => {
-            swal("Upload Bukti Pembayaran Sukses. Mohon Bersabar Menunggu Persetujuan Sistem.")
-            this.modalHandleUpgrade()
-        })
-        .catch((err => {
-            console.log(err)
-        }))
-
+        
+        if(this.state.selectedFile == null){
+            swal("Pilih File Dahulu")
+        }else {
+            let formData = new FormData();
+            formData.append("file", this.state.selectedFile, this.state.selectedFile.name )
+            formData.append("paymentData", JSON.stringify(formUser));
+    
+            Axios.post(`${API_URL}/documents/payment/${this.props.user.id}`, formData)
+            .then((res) => {
+                swal("Upload Bukti Pembayaran Sukses. Mohon Bersabar Menunggu Persetujuan Sistem.")
+                this.modalHandleUpgrade()
+            })
+            .catch((err => {
+                console.log(err)
+            }))
+        }
     }
 
     componentDidMount() {

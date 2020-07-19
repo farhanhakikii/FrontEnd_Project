@@ -46,17 +46,19 @@ class EditProfile extends React.Component{
 
     fileUploadHandler = () => {
         let formData = new FormData();
-
-        formData.append("file", this.state.selectedFile, this.state.selectedFile.name )
-        Axios.patch(`${API_URL}/documents/user/${this.props.user.id}`, formData)
-        .then((res) => {
-            swal("Profile Photo Updated")
-            this.uploadHandle()
-        })
-        .catch((err => {
-            console.log(err)
-        }))
-
+        if(this.state.selectedFile == null){
+            swal("Pilih File Dahulu")
+        }else {
+            formData.append("file", this.state.selectedFile, this.state.selectedFile.name )
+            Axios.patch(`${API_URL}/documents/user/${this.props.user.id}`, formData)
+            .then((res) => {
+                swal("Foto Profile Diperbaharui")
+                this.uploadHandle()
+            })
+            .catch((err => {
+                console.log(err)
+            }))    
+        }
     }
 
     changePassword = () => {

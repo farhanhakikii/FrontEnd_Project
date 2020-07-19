@@ -60,7 +60,6 @@ class Home extends React.Component{
             .then((res) => {
             this.setState({novelList: res.data})
             this.setState({loading: false})
-            console.log(res)
         })
         .catch((err) => {
             console.log(err)

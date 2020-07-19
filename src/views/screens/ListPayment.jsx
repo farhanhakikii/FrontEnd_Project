@@ -59,7 +59,7 @@ class ListPayment extends React.Component{
     confirmPayment = (userId) => {
         Axios.patch(`${API_URL}/users/${userId}`)
         .then((res) => {
-            swal("Get Premium User Success.")
+            swal("Berhasil Menjadikan User Premium")
         })
         .catch((err) => {
             console.log(err)
@@ -69,7 +69,7 @@ class ListPayment extends React.Component{
     rejectPayment = (userId) => {
         Axios.patch(`${API_URL}/users/${userId}/failed`)
         .then((res) => {
-            swal("Get Premium User Failed.")
+            swal("Gagal Menjadikan User Premium")
         })
         .catch((err) => {
             console.log(err)

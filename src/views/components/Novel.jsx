@@ -16,7 +16,7 @@ export class Novel extends React.Component{
                     if(val.title.toLowerCase().includes(searchBar)){
                     return <div className="p-3">
                         <Link style={{ textDecoration: "none", color: "inherit" }} to={`/novel/${val.id}`}>
-                          <NovelCard imgsrc={val.image ? val.image : noImage} title={val.title} author={val.author.username}/>      
+                          <NovelCard imgsrc={val.image ? val.image : noImage} title={val.title} author={val.author.username ? val.author.username : null}/>      
                         </Link>
                     </div>
                     }

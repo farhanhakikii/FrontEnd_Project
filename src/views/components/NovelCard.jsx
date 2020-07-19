@@ -10,19 +10,6 @@ const ProductCard = (props) => {
             </div>
             </div>
     )
-    // <div style={{ backgroundColor: "black" /*backgroundImage: `url(${props.imgsrc})`, backgroundSize: "cover"*/}} className="card text-center d-inline-block">
-    //         <div className="mt-4 overflow">
-    //             <img src={props.imgsrc} style={{ width: "225px", height: "225px", objectFit: "contain" }} alt={props.title}/>
-    //         </div>
-    //         <div className="card-body text-white">
-    //             <h4 className="card-title">
-    //                 {props.title}
-    //             </h4>
-    //         <p className="card-text text-white">
-    //             {props.author}
-    //         </p>
-    //         </div>
-    //     </div>
 }
 
 export default ProductCard
