@@ -18,7 +18,8 @@ class Home extends React.Component{
         novelPerPage: 15,
         category: [],
         selectedCategory: 0,
-        viewByCategory: false
+        viewByCategory: false,
+        searchBar: ""
     }
 
     inputHandler = (e,field) => {
@@ -81,9 +82,24 @@ class Home extends React.Component{
         const indexOfFirstNovel = indexOfLastNovel - novelPerPage
         const currentNovel = novelList.slice(indexOfFirstNovel, indexOfLastNovel)
 
+        const pageNumber = Math.ceil( novelList.length / novelPerPage )
+
         const paginate = pageNum => { this.setState({currentPage: pageNum}) }
-        const nextPage = () => this.setState({ currentPage: currentPage + 1 })
-        const prevPage = () => this.setState({ currentPage: currentPage - 1 })
+        const nextPage = () => {
+            if(currentPage < pageNumber) {
+                this.setState({ currentPage: currentPage + 1 })
+            } else {
+                this.setState({ currentPage: pageNumber})
+            }
+
+        }
+        const prevPage = () => {
+            if(currentPage > 1) {
+                this.setState({ currentPage: currentPage - 1 })
+            } else {
+                this.setState({ currentPage: 1})
+            }
+        }
         return (
             <>
                 <div className="d-flex align-items-center justify-content-center mt-2">
@@ -100,13 +116,14 @@ class Home extends React.Component{
                         </div>
                     </div>
                     <div>
-                        <input style={{width: "750px", height: "35px", backgroundColor: "black", color: "white"}} type='text' className="form-control rounded mt-2 mr-4" placeholder='Search Novel'/>
+                        <input value={this.state.searchBar} style={{width: "750px", height: "35px", backgroundColor: "black", color: "white"}} 
+                               type='text' className="form-control rounded mt-2 mr-4" placeholder='Search Novel' onChange={(e) => this.inputHandler(e, "searchBar")}/>
                     </div>
                     <div>
                         <button className="btn mt-2" style={{backgroundColor: "black", color: "white"}} onClick={this.viewNovel}>Filter</button>
                     </div>
                 </div>
-                <Novel novel={currentNovel} loading={loading}/>
+                <Novel novel={currentNovel} loading={loading} searchBar={this.state.searchBar}/>
                 <div className="mt-5">
                     <Pagination novelPerPage={novelPerPage} totalNovel={novelList.length} paginate={paginate} nextPage={nextPage} prevPage={prevPage} />
                 </div>

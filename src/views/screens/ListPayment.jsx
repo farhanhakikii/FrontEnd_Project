@@ -112,7 +112,6 @@ class ListPayment extends React.Component{
                             <td>{val.accountOwner}</td>
                             <td>
                                 <a href={val.image}>File</a>
-                                {/* <img src={val.image} style={{width: "200px", height: "100px"}} alt=""/> */}
                             </td>
                             <td>
                                 <button className="btn btn-success mr-2" onClick={() => this.confirmPayment(val.userId)}>Confirm</button>

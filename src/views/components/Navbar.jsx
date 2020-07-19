@@ -86,9 +86,16 @@ class Navbar extends React.Component{
         {
           this.props.user.username ? 
           <>
-          <Link to={`/users/${this.props.user.id}`}>
-            <button className="btn btn-dark mr-2 p-1">{this.props.user.username}</button>
-          </Link>
+          {
+            this.props.user.role == "admin" ?
+              <Link to="/admin">
+                <button className="btn btn-dark mr-2 p-1">{this.props.user.username}</button>
+              </Link>
+               : 
+              <Link to={`/users/${this.props.user.id}`}>
+                <button className="btn btn-dark mr-2 p-1">{this.props.user.username}</button>
+              </Link>
+          }
           <Link to="/">
             <button className="btn btn-danger p-1" onClick={this.logoutBtnHandler}>Logout</button>
           </Link>

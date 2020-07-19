@@ -40,19 +40,6 @@ export const loginHandler = (userData) => {
             console.log(err)
           })
         }
-        // else if(res.data.password != password){
-        //   swal("Password yang Anda Masukkan Salah");
-        //   dispatch({
-        //     type: "ON_LOGIN_FAIL",
-        //     payload: "Password Salah",
-        //   })
-        // } else {
-          // swal("Berhasil Login");
-          // dispatch({
-          //   type: "ON_LOGIN_SUCCESS",
-          //   payload: res.data,
-        //   });
-        // }
       })
       .catch((err) => {
         console.log(err);

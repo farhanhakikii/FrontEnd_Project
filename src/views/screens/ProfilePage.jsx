@@ -157,9 +157,6 @@ class ProfilePage extends React.Component{
                                 <img className="border" src={this.state.userProfile.image ? this.state.userProfile.image : noPictUser} style={{height: "250px", width: "250px"}} alt="image"/>
                                 <h1 className="mt-2">
                                     {this.state.userProfile.fullName}
-                                    {/* {
-                                        this.props.user.isVerified ? <p>Verified</p> : null
-                                    } */}
                                 </h1>
                                 <h6 className="mt-2">{this.state.userProfile.email}</h6>
                                 {
